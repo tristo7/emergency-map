@@ -1,7 +1,7 @@
 <?php
 	$servername = 	"localhost";
 	$username 	= 	"root";
-	$password 	= 	"Vulc@n123!";
+	$password 	= 	"G@m3c0ck$01";
 	$database 	=	"emergencyarea";
 	$conn = new mysqli($servername, $username, $password, $database);
 	// Verify connection to database
