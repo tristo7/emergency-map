@@ -15,62 +15,70 @@
 			  center: {lat: 33.828640, lng: -85.763048},
 			  zoom: 15
 			});
-			var infoWindow = new google.maps.InfoWindow({map: map});
-			
 			//load current polygons
 			var results = $.getJSON("IO.php", function(result){
 				//console.log(result);
 				$.each(result, function(i, field){
+					var color;
+					switch(field.type){
+						case "tornado":
+							color = '#e6e600';
+							break;
+						case "fire":
+							color = '#ff1a1a';
+							break;
+						case "road_hazard":
+							color = '#3399ff';
+							break;
+						case "other":
+							color = '#ff00ff';
+							break;
+					}
+				
 					//console.log(field.latLngArray);
 					//console.log(field.expiration);
 					//console.log(field.description);
 					var paths = [];
 					//console.log(JSON.parse(field.latLngArray));
-					var tempPoly = new google.maps.Polygon({ //TODO: also add info window to polygon.
+					var tempPoly = new google.maps.Polygon({
 						paths:JSON.parse(field.latLngArray),
-						fillColor: '#ff9980',
+						fillColor: color,
 						fillOpacity: 0.35,
 						strokeWeight: 1,
 						strokeColor: '#ff0000'
 					});
 					
+					
 					tempPoly.setMap(map);
-					addInfoWindow(tempPoly,field.expiration,field.description);
+					addInfoWindow(tempPoly,field.expiration,field.description,field.type);
 				});
 			});
 			
 			
 			
-			function addInfoWindow(polygon, expir, desc){
-				var contentString = '<div id="content">'+
-				  '<div id="siteNotice">'+
-				  '</div>'+
-				  '<h2 id="expiration">Expiration</h2>'+
-				  '<p>'+expir+''+
-				  '<h2 id="description" >Description</h2>'+
-				  '<p>'+desc+''+
-				  '</div>';
+			function addInfoWindow(polygon, expir, desc, typ){
+				var contentString = 
+					'<div id="content">'+
+					'<div id="siteNotice">'+
+					'</div>'+
+					'<h2>Expiration</h2>'+
+					'<p>'+expir+''+
+					'<h2>Description</h2>'+
+					'<p>'+desc+''+
+					'<h2>Type</h2>'+
+					'<p>'+typ+''+
+					'</div>';
 				var info = new google.maps.InfoWindow({
 					content: contentString
 				});
 				
 				//generate infowindow when user clicks on the polygon.
 				google.maps.event.addListener(polygon, 'click', function(event){
-					//currently only displays expiration and details
-					//would like to add a custom menu to have several features (edit details/expirate, delete, edit fence, etc)
 					info.setPosition(event.latLng);
 					info.open(map);
 				});
 			}
 		}
-
-		function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-			infoWindow.setPosition(pos);
-			infoWindow.setContent(browserHasGeolocation ?
-								  'Error: The Geolocation service failed.' :
-								  'Error: Your browser doesn\'t support geolocation.');
-		}
-	
 	</script>
 	
 	<script async defer

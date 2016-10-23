@@ -70,7 +70,7 @@
 				  center: {lat: 33.828640, lng: -85.763048},
 				  zoom: 15
 				});
-				var infoWindow = new google.maps.InfoWindow({map: map});
+				//var infoWindow = new google.maps.InfoWindow({map: map});    was causing a small info window to popup on load.
 				
 				//load current polygons
 				var results = $.getJSON("IO.php", function(result){
@@ -80,12 +80,16 @@
 						switch(field.type){
 							case "tornado":
 								color = '#e6e600';
+								break;
 							case "fire":
 								color = '#ff1a1a';
+								break;
 							case "road_hazard":
 								color = '#3399ff';
+								break;
 							case "other":
 								color = '#ff00ff';
+								break;
 						}
 					
 						//console.log(field.latLngArray);
@@ -127,8 +131,6 @@
 					
 					//generate infowindow when user clicks on the polygon.
 					google.maps.event.addListener(polygon, 'click', function(event){
-						//currently only displays expiration and details
-						//would like to add a custom menu to have several features (edit details/expirate, delete, edit fence, etc)
 						info.setPosition(event.latLng);
 						info.open(map);
 					});
@@ -185,15 +187,9 @@
 				var polygon = currentPolygon;
 				var verticles = polygon.getPath();
 				var latLngArray = polygon.getPath().getArray();
-				//add popup window on polygon click for info.
-				//addInfoWindow(polygon, expiration, description);
 				var expiration = document.getElementById("expiration").value;
 				var description = document.getElementById("description").value;
 				var type = document.getElementById("type").value;
-				console.log("Expiration: " + expiration);
-				console.log("Description: " + description);
-				console.log("Type: " + type);
-				console.log("JSON LatLng: " + JSON.stringify(latLngArray));
 				
 				
 				var sendData = {
@@ -206,7 +202,7 @@
 					url: 'IO.php',
 					type: 'POST',
 					success: function (data) {
-						console.log("Data sent to database.");
+						console.log("Data sent.");
 					},
 					data: {
 						latlng: JSON.stringify(latLngArray),
@@ -215,6 +211,7 @@
 						type: type
 					}
 				});
+				//clear out the form.
 				document.getElementById('myModal').style.display = "none";
 				document.getElementById("polygon_info").reset();
 				initMap(); //reinitialize map to load the created polygon from database.
