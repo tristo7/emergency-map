@@ -30,14 +30,14 @@
 					<h2>Polygon Information</h2>
 				</div>
 				<div class="modal-body">
-					<form name="polygon_info" method="get" accept-charset="utf-8">
+					<form name="polygon_info" method="get" accept-charset="utf-8" id="polygon_info">
 			  		<ul>
 					    <li><label for="expiration">Expiration</label>
 					    <input type="datetime-local" name="expiration" placeholder="" id="expiration" required></li>
 					    <li><label for="description">Description</label>
 					    <input type="text" name="description" placeholder="Additional Information" id="description"required></li>
 						<li><label for="type">Type</label>
-						    <select name="type">
+						    <select name="type" id="type">
 								<option value="tornado">Tornado</option>
 								<option value="fire">Fire</option>
 								<option value="road_hazard">Road Hazard</option>
@@ -137,10 +137,7 @@
 					
 				google.maps.event.addListener(drawingManager, 'polygoncomplete', function(polygon) {
 					currentPolygon = polygon;
-					
-					
-					//popup form start
-					
+								
 					// Get the modal
 					var modal = document.getElementById('myModal');
 					
@@ -162,7 +159,6 @@
 						}
 					}
 					
-					//popup form end
 					//var expiration = prompt("Please enter the expiration time (YYYY-MM-DD HH-MM-SS)", "2016-10-25 12:00:00");
 					//var description = prompt("Please enter a description", "Tornado warning/Road hazard/etc");
 				});
@@ -175,6 +171,14 @@
 				var latLngArray = polygon.getPath().getArray();
 				//add popup window on polygon click for info.
 				//addInfoWindow(polygon, expiration, description);
+				var expiration = document.getElementById("expiration").value;
+				var description = document.getElementById("description").value;
+				var type = document.getElementById("type").value;
+				console.log("Expiration: " + expiration);
+				console.log("Description: " + description);
+				console.log("Type: " + type);
+				console.log("JSON LatLng: " + JSON.stringify(latLngArray));
+				
 				
 				var sendData = {
 					latlng: JSON.stringify(latLngArray),
@@ -191,10 +195,13 @@
 					data: {
 						latlng: JSON.stringify(latLngArray),
 						expires: expiration,
-						desc: description
+						desc: description,
+						type: type
 					}
 				});
-				initMap();
+				document.getElementById('myModal').style.display = "none";
+				document.getElementById("polygon_info").reset();
+				initMap(); //reinitialize map to load the created polygon from database.
 			}
 	</script>
 	
