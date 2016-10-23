@@ -11,7 +11,7 @@
 	
 	function save($coords, $expiration, $description, $type){
 		global $conn;
-		$sql = "INSERT INTO data (latLngArray, expiration, description)
+		$sql = "INSERT INTO data (latLngArray, expiration, description, type)
 			VALUES('".$coords."','".$expiration."','".$description."','".$type."');";
 			
 		mysqli_query($conn,$sql);
