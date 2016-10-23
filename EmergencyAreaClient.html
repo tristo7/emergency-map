@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EM Map</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="EmergencyArea.css">
+	<script src="jquery-3.1.1.min.js"></script>
+  </head>
+  <body>
+		<h1>Emergency Management Map</h1>
+		<div id="map"></div>
+	<script type="text/javascript">
+		function initMap() {
+			var map = new google.maps.Map(document.getElementById('map'), {
+			  center: {lat: 33.828640, lng: -85.763048},
+			  zoom: 15
+			});
+			var infoWindow = new google.maps.InfoWindow({map: map});
+			
+			//load current polygons
+			var results = $.getJSON("IO.php", function(result){
+				//console.log(result);
+				$.each(result, function(i, field){
+					//console.log(field.latLngArray);
+					//console.log(field.expiration);
+					//console.log(field.description);
+					var paths = [];
+					//console.log(JSON.parse(field.latLngArray));
+					var tempPoly = new google.maps.Polygon({ //TODO: also add info window to polygon.
+						paths:JSON.parse(field.latLngArray),
+						fillColor: '#ff9980',
+						fillOpacity: 0.35,
+						strokeWeight: 1,
+						strokeColor: '#ff0000'
+					});
+					
+					tempPoly.setMap(map);
+					addInfoWindow(tempPoly,field.expiration,field.description);
+				});
+			});
+			
+			
+			
+			function addInfoWindow(polygon, expir, desc){
+				var contentString = '<div id="content">'+
+				  '<div id="siteNotice">'+
+				  '</div>'+
+				  '<h2 id="expiration">Expiration</h2>'+
+				  '<p>'+expir+''+
+				  '<h2 id="description" >Description</h2>'+
+				  '<p>'+desc+''+
+				  '</div>';
+				var info = new google.maps.InfoWindow({
+					content: contentString
+				});
+				
+				//generate infowindow when user clicks on the polygon.
+				google.maps.event.addListener(polygon, 'click', function(event){
+					//currently only displays expiration and details
+					//would like to add a custom menu to have several features (edit details/expirate, delete, edit fence, etc)
+					info.setPosition(event.latLng);
+					info.open(map);
+				});
+			}
+		}
+
+		function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+			infoWindow.setPosition(pos);
+			infoWindow.setContent(browserHasGeolocation ?
+								  'Error: The Geolocation service failed.' :
+								  'Error: Your browser doesn\'t support geolocation.');
+		}
+	
+	</script>
+	
+	<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgrYOrdmh3-jkJHk9ibXBrfQIeFAUPhak&libraries=drawing&callback=initMap">
+    </script>
+  </body>
+</html>
