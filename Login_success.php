@@ -37,6 +37,10 @@ if(empty('username')){
 								<option value="tornado">Tornado</option>
 								<option value="fire">Fire</option>
 								<option value="road_hazard">Road Hazard</option>
+								<option value="snow_storm">Snow Storm</option>
+								<option value="chemical_spill">Chemical Spill</option>
+								<option value="flooding">Flooding</option>
+								<option value="hurricane">Hurricane</option>
 								<option value="other">Other</option>
 							</select></li>
 					    <li><input type="button" value="Finish" onclick="addPoly()"></li>

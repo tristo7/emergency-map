@@ -3,7 +3,7 @@ var currentPolygon;
 		function initMap() {
 				var map = new google.maps.Map(document.getElementById('map'), {
 				  center: {lat: 33.828640, lng: -85.763048},
-				  zoom: 15
+				  zoom: 12
 				});
 				//var infoWindow = new google.maps.InfoWindow({map: map});    was causing a small info window to popup on load.
 				
@@ -20,10 +20,22 @@ var currentPolygon;
 								color = '#ff1a1a';
 								break;
 							case "road_hazard":
-								color = '#3399ff';
+								color = '#ff3399';
 								break;
 							case "other":
 								color = '#ff00ff';
+								break;
+							case "flooding":
+								color = '#1ad1ff';
+								break;
+							case "snow_storm":
+								color = '#99e6ff';
+								break;
+							case "hurricane":
+								color = '#000080';
+								break;
+							case "chemical_spill":
+								color = '#9fff80';
 								break;
 						}
 					
@@ -148,5 +160,7 @@ var currentPolygon;
 				//clear out the form.
 				document.getElementById('myModal').style.display = "none";
 				document.getElementById("polygon_info").reset();
-				initMap(); //reinitialize map to load the created polygon from database.
+				setTimeout(function(){
+					initMap(); //reinitialize map to load the created polygon from database.
+				}, 500); 
 			}
