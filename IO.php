@@ -19,7 +19,7 @@
 	
 	function load(){
 		global $conn;
-		$sql = "SELECT latLngArray, expiration, description, type FROM data WHERE expiration > NOW();";
+		$sql = "SELECT data.latLngArray, data.expiration, data.description, data.type, types.Color FROM data RIGHT JOIN types ON data.type = types.TypeName WHERE expiration > NOW();";
 		$result = mysqli_query($conn,$sql);
 		$to_encode = array();
 		while($row = $result->fetch_assoc()) {
