@@ -9,44 +9,11 @@ var currentPolygon;
 				
 				//load current polygons
 				var results = $.getJSON("IO.php", function(result){
-					//console.log(result);
 					$.each(result, function(i, field){
-						var color;
-						switch(field.type){
-							case "tornado":
-								color = '#e6e600';
-								break;
-							case "fire":
-								color = '#ff1a1a';
-								break;
-							case "road_hazard":
-								color = '#ff3399';
-								break;
-							case "other":
-								color = '#ff00ff';
-								break;
-							case "flooding":
-								color = '#1ad1ff';
-								break;
-							case "snow_storm":
-								color = '#99e6ff';
-								break;
-							case "hurricane":
-								color = '#000080';
-								break;
-							case "chemical_spill":
-								color = '#9fff80';
-								break;
-						}
-					
-						//console.log(field.latLngArray);
-						//console.log(field.expiration);
-						//console.log(field.description);
 						var paths = [];
-						//console.log(JSON.parse(field.latLngArray));
 						var tempPoly = new google.maps.Polygon({
 							paths:JSON.parse(field.latLngArray),
-							fillColor: color,
+							fillColor: "#" + field.Color,
 							fillOpacity: 0.35,
 							strokeWeight: 1,
 							strokeColor: '#ff0000'
