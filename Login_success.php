@@ -2,7 +2,6 @@
 session_name("login");
 session_start();
 if(empty('username')){
-	debug_to_console("session not set!");
 	header("location:EmergencyAreaAdmin.html");
 }
 ?>
@@ -53,7 +52,7 @@ if(empty('username')){
 			</div>
 		</div>
 	<script type="text/javascript" src="map.js"></script>
-	
+	<script type="text/javascript" src="angular.min.js"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgrYOrdmh3-jkJHk9ibXBrfQIeFAUPhak&libraries=drawing&callback=initMap"></script>
   </body>
 </html>
