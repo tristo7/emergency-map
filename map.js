@@ -94,13 +94,13 @@ var currentPolygon;
 				//Get data from Modal form.
 				var expiration = document.getElementById("expiration").value;
 				var description = document.getElementById("description").value;
-				var type = document.getElementById("type").value;
+				var typ = document.getElementById("type").value;
 				
 				//Pack data to be sent.
 				var sendData = {
 					latlng: JSON.stringify(latLngArray),
 					expires: expiration,
-					desc: description
+					desc: description,
 					type: type
 				};
 				
