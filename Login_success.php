@@ -34,23 +34,16 @@
 						<li><label for="type">Type</label>
 						    <select name="type" id="type">
 								<script type="text/javascript">
+									//dynammically build the type list.
+									var select = document.getElementById('type');
 									var results = $.getJSON("types.php", function(result){
 										$.each(result, function(i, field){
-											console.log(field);
+											var option = document.createElement('option');
+											option.text = option.value = field.TypeName;
+											select.add(option);
 										});
 									});
-									var select = document.getElementById('type');
 								</script>
-						
-						
-								<option value="tornado">Tornado</option>
-								<option value="fire">Fire</option>
-								<option value="road hazard">Road Hazard</option>
-								<option value="snow storm">Snow Storm</option>
-								<option value="chemical spill">Chemical Spill</option>
-								<option value="flooding">Flooding</option>
-								<option value="hurricane">Hurricane</option>
-								<option value="other">Other</option>
 							</select></li>
 					    <li><input type="button" value="Finish" onclick="addPoly()"></li>
 			  		</ul>
