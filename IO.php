@@ -14,6 +14,7 @@
 		die("Connection failed: " . mysqli_error($conn));
 	} // else we are connected.
 	
+	//Saves data into the mySQL database.
 	function save($coords, $expiration, $description, $type){
 		global $conn;
 		$sql = "INSERT INTO data (latLngArray, expiration, description, type)
@@ -22,9 +23,14 @@
 		mysqli_query($conn,$sql);
 	}
 	
+	//Loads data (as a JSON array) from the mySQL database.
 	function load(){
 		global $conn;
-		$sql = "SELECT data.latLngArray, data.expiration, data.description, data.type, types.Color FROM data RIGHT JOIN types ON data.type = types.TypeName WHERE expiration > NOW();";
+		$sql = "SELECT data.latLngArray, data.expiration, data.description, data.type, types.Color 
+				FROM data 
+				RIGHT JOIN types 
+				ON data.type = types.TypeName 
+				WHERE expiration > NOW();";
 		$result = mysqli_query($conn,$sql);
 		$to_encode = array();
 		while($row = $result->fetch_assoc()) {
