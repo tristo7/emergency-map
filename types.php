@@ -2,7 +2,7 @@
 	//verify user is authenticated.
 	session_name("login");
 	session_start();
-	if(empty('username')){
+	if(!isset($_SESSION['username'])){
 		header("location:EmergencyAreaAdmin.html");
 	}
 	//setup for database access
