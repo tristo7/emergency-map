@@ -25,12 +25,12 @@
 					<h2>Polygon Information</h2>
 				</div>
 				<div class="modal-body">
-					<form name="polygon_info" method="get" accept-charset="utf-8" id="polygon_info">
+					<form name="polygon_info" method="get" accept-charset="utf-8" id="polygon_info" novalidate>
 			  		<ul>
-					    <li><label for="expiration">Expiration</label>
+					    <li><label>Expiration</label>
 					    <input type="datetime-local" name="expiration" placeholder="" id="expiration" required></li>
-					    <li><label for="description">Description</label>
-					    <input type="text" name="description" placeholder="Additional Information" id="description"required></li>
+					    <li><label>Description</label>
+					    <input type="text" name="description" placeholder="Additional Information" id="description"></li>
 						<li><label for="type">Type</label>
 						    <select name="type" id="type">
 								<script type="text/javascript">
@@ -45,7 +45,7 @@
 									});
 								</script>
 							</select></li>
-					    <li><input type="button" value="Finish" onclick="addPoly()"></li>
+					    <li><button onClick="addPoly()">Finish</button></li>
 			  		</ul>
 			</form>
 				</div>
