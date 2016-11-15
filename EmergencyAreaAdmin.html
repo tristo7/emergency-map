@@ -8,7 +8,8 @@
   </head>
   <body>
 		<h1>Emergency Management Map</h1>
-		<section class="loginform cf" id="loginForm">
+		
+		<!-- <section class="loginform cf" id="loginForm">
 			<form name="login" action="Login.php" method="post" accept-charset="utf-8">
 			  <ul>
 			    <li><label for="username">Username</label>
@@ -16,9 +17,18 @@
 			    <li><label for="password">Password</label>
 			    <input type="password" name="password" placeholder="password" id="password"required></li>
 			    <li>
-			    <input type="submit" value="Login"></li>
+			    
 			  </ul>
 			</form>
-		</section>
+		</section> -->
+		<div class="login-page">
+			<div class="form">
+				<form class="login-form" action="Login.php" method="post" accept-charset="utf-8">
+				  <input type="text" name="username" placeholder="username" id="username" required/>
+				  <input type="password" name="password" placeholder="password" id="password"required/>
+				  <button>login</button>
+				</form>
+			</div>
+		</div>
   </body>
 </html>
