@@ -28,12 +28,17 @@ var currentPolygon;
 				
 				
 				function addInfoWindow(polygon, expir, desc, typ){
+					var options = {
+						weekday: "long", year: "numeric", month: "short",
+						day: "numeric", hour: "2-digit", minute: "2-digit"
+					};
+					var date = new Date(expir);
 					var contentString = 
 						'<div id="content">'+
 						'<div id="siteNotice">'+
 						'</div>'+
 						'<h2>Expiration</h2>'+
-						'<p>'+expir+''+
+						'<p>'+date.toLocaleTimeString("en-us", options)+
 						'<h2>Description</h2>'+
 						'<p>'+desc+''+
 						'<h2>Type</h2>'+

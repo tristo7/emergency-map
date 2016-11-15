@@ -35,9 +35,9 @@ if(empty('username')){
 						    <select name="type" id="type">
 								<option value="tornado">Tornado</option>
 								<option value="fire">Fire</option>
-								<option value="road_hazard">Road Hazard</option>
-								<option value="snow_storm">Snow Storm</option>
-								<option value="chemical_spill">Chemical Spill</option>
+								<option value="road hazard">Road Hazard</option>
+								<option value="snow storm">Snow Storm</option>
+								<option value="chemical spill">Chemical Spill</option>
 								<option value="flooding">Flooding</option>
 								<option value="hurricane">Hurricane</option>
 								<option value="other">Other</option>
