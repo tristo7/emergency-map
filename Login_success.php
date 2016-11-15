@@ -33,6 +33,17 @@ if(empty('username')){
 					    <input type="text" name="description" placeholder="Additional Information" id="description"required></li>
 						<li><label for="type">Type</label>
 						    <select name="type" id="type">
+								<script type="text/javascript">
+									var results = $.getJSON("types.php", function(result){
+										$.each(result, function(i, field){
+											console.log(field);
+										});
+									});
+									var select = document.getElementById('type');
+									
+								</script>
+						
+						
 								<option value="tornado">Tornado</option>
 								<option value="fire">Fire</option>
 								<option value="road hazard">Road Hazard</option>
