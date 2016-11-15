@@ -40,7 +40,6 @@
 										});
 									});
 									var select = document.getElementById('type');
-									
 								</script>
 						
 						
