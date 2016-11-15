@@ -1,9 +1,9 @@
 <?php
-session_name("login");
-session_start();
-if(empty('username')){
-	header("location:EmergencyAreaAdmin.html");
-}
+	session_name("login");
+	session_start();
+	if(!isset($_SESSION['username'])){
+		header("location:EmergencyAreaAdmin.html");
+	}
 ?>
 <!DOCTYPE html>
 <html>
