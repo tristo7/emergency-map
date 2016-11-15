@@ -1,4 +1,9 @@
 <?php
+	session_name("login");
+	session_start();
+	if(empty('username')){
+		header("location:EmergencyAreaAdmin.html");
+	}
 	$servername = 	"localhost";
 	$username 	= 	"root";
 	$password 	= 	"G@m3c0ck$01";
