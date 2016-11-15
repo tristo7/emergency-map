@@ -1,18 +1,16 @@
 <?php
+	//verify user is authenticated.
 	session_name("login");
 	session_start();
 	if(empty('username')){
 		header("location:EmergencyAreaAdmin.html");
 	}
+	//setup for database access
 	$servername = 	"localhost";
 	$username 	= 	"root";
 	$password 	= 	"G@m3c0ck$01";
 	$database 	=	"emergencyarea";
-	$conn = new mysqli($servername, $username, $password, $database);
-	// Verify connection to database
-	if (!$conn) {
-		die("Connection failed: " . mysqli_error($conn));
-	} // else we are connected.
+	$conn = new mysqli($servername, $username, $password, $database) or die("Cannot connect to database."); 
 	
 	//Saves data into the mySQL database.
 	function save($coords, $expiration, $description, $type){
