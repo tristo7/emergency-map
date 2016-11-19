@@ -1,16 +1,20 @@
 <?php
-	//verify user is authenticated.
 	session_name("login");
 	session_start();
-	if(!isset($_SESSION['username'])){
-		header("location:EmergencyAreaAdmin.html");
-	}
+	
 	//setup for database access
 	$servername = 	"localhost";
 	$username 	= 	"root";
 	$password 	= 	"G@m3c0ck$01";
 	$database 	=	"emergencyarea";
 	$conn = new mysqli($servername, $username, $password, $database) or die("Cannot connect to database."); 
+	
+	if(isset($_POST['latlng'])){
+		verifyAuthentication();
+		save($_POST['latlng'], $_POST['expires'], $_POST['desc'], $_POST['type']);
+	} else {
+		load();
+	}
 	
 	//Saves data into the mySQL database.
 	function save($coords, $expiration, $description, $type){
@@ -19,6 +23,7 @@
 			VALUES('".$coords."','".$expiration."','".$description."','".$type."');";
 			
 		mysqli_query($conn,$sql);
+		mysqli_close($conn);
 	}
 	
 	//Loads data (as a JSON array) from the mySQL database.
@@ -35,13 +40,13 @@
 		  $to_encode[] = $row;
 		}
 		echo json_encode($to_encode);
-	}
-	if(isset($_POST['latlng'])){
-		save($_POST['latlng'], $_POST['expires'], $_POST['desc'], $_POST['type']);
-	} else {
-		load();
+		mysqli_close($conn);
 	}
 	
-	
-	mysqli_close($conn);
+	//Verifies that the user has authenticated with the system.
+	function verifyAuthentication(){
+		if(!isset($_SESSION['username'])){
+			header("location:EmergencyAreaAdmin.html");
+		}
+	}
 ?>
