@@ -7,7 +7,7 @@ function initMap() {
 		});
 		
 		//load current polygons
-		var results = $.getJSON("IO.php", function(result){
+		$.getJSON("IO.php", function(result){
 			$.each(result, function(i, field){
 				var paths = [];
 				var tempPoly = new google.maps.Polygon({
@@ -24,7 +24,7 @@ function initMap() {
 			});
 		});
 		
-		
+				
 		
 		function addInfoWindow(polygon, expir, desc, typ){
 			var options = {
@@ -40,6 +40,7 @@ function initMap() {
 					'<h2>Type</h2>'+
 						'<p>'+typ+''+
 				'</div>';
+				
 			var info = new google.maps.InfoWindow({
 				content: contentString
 			});
