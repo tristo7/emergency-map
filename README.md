@@ -1,9 +1,6 @@
 ## TEST
 # emergency-map
-[View the map here.](http://tristo7.asuscomm.com/emergency-map/EmergencyAreaClient.html)
-
-
-[Administrate the map here.](http://tristo7.asuscomm.com/emergency-map/EmergencyAreaAdmin.html)
+Note - I am no longer hosting this service. I may re-implement this service in a better way at a later date.
 
 Uses:
 - mySQL
