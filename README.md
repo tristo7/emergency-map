@@ -1,6 +1,5 @@
 ## TEST
 # emergency-map
-Note - I am no longer hosting this service. I may re-implement this service in a better way at a later date.
 
 Uses:
 - mySQL
